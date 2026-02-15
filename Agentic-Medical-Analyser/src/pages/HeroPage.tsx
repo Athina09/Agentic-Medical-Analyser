@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MessageCircle } from "lucide-react";
+import { Stethoscope, Lightbulb } from "lucide-react";
 import Heart3D from "@/components/Heart3D";
 
 const FEATURE_CARDS = [
@@ -77,28 +77,31 @@ export default function HeroPage() {
         <p className="text-white/95 text-base md:text-lg mt-4 max-w-lg">
           Revolutionizing medical diagnostics through AI and data science.
         </p>
-        <Link
-          to="/diagnosis"
-          className="inline-block mt-6 px-8 py-3.5 rounded-xl font-semibold text-white text-base md:text-lg shadow-xl hover:shadow-2xl transition-all hover:scale-[1.02] active:scale-[0.98]"
-          style={{
-            background: "linear-gradient(135deg, #9333ea 0%, #7c3aed 50%, #6366f1 100%)",
-          }}
-        >
-          Start Diagnosis
-        </Link>
-      </div>
 
-      {/* Chat - bottom right */}
-      <Link
-        to="/chat"
-        className="absolute right-6 bottom-6 md:right-10 md:bottom-10 w-12 h-12 rounded-full flex items-center justify-center text-white shadow-xl hover:scale-110 transition-transform z-20"
-        style={{
-          background: "linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)",
-        }}
-        aria-label="Chat"
-      >
-        <MessageCircle className="w-6 h-6" />
-      </Link>
+        {/* Page navigation cards */}
+        <div className="mt-8 flex flex-wrap gap-4">
+          <Link
+            to="/intake"
+            className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-xl font-semibold text-white text-base shadow-xl hover:shadow-2xl transition-all hover:scale-[1.02] active:scale-[0.98]"
+            style={{
+              background: "linear-gradient(135deg, #9333ea 0%, #7c3aed 50%, #6366f1 100%)",
+            }}
+          >
+            <Stethoscope className="w-5 h-5 flex-shrink-0" />
+            Start Triage
+          </Link>
+          <Link
+            to="/explain"
+            className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-xl font-semibold text-white text-base shadow-xl hover:shadow-2xl transition-all hover:scale-[1.02] active:scale-[0.98] border border-white/40"
+            style={{
+              background: "linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.15) 100%)",
+            }}
+          >
+            <Lightbulb className="w-5 h-5 flex-shrink-0" />
+            AI Explainability
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

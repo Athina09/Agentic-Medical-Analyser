@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
@@ -62,6 +63,22 @@ export default {
         vital: {
           green: "hsl(var(--vital-green))",
           amber: "hsl(var(--vital-amber))",
+        },
+        risk: {
+          low: "hsl(var(--risk-low))",
+          "low-bg": "hsl(var(--risk-low-bg))",
+          medium: "hsl(var(--risk-medium))",
+          "medium-bg": "hsl(var(--risk-medium-bg))",
+          high: "hsl(var(--risk-high))",
+          "high-bg": "hsl(var(--risk-high-bg))",
+        },
+        medical: {
+          teal: "hsl(var(--medical-teal))",
+          "teal-light": "hsl(var(--medical-teal-light))",
+          blue: "hsl(var(--medical-blue))",
+          "blue-light": "hsl(var(--medical-blue-light))",
+          purple: "hsl(var(--medical-purple))",
+          "purple-light": "hsl(var(--medical-purple-light))",
         },
         navy: {
           deep: "hsl(var(--navy-deep))",

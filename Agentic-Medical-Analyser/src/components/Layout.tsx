@@ -4,7 +4,10 @@ import { Menu } from "lucide-react";
 export default function Layout() {
   const location = useLocation();
   const isHome = location.pathname === "/";
-  const isDiagnosis = location.pathname === "/diagnosis";
+  const isDashboard = location.pathname === "/dashboard";
+  const isIntake = location.pathname === "/intake";
+  const isResults = location.pathname === "/results";
+  const isHospitals = location.pathname === "/hospitals";
   const isChat = location.pathname === "/chat";
   const isExplain = location.pathname === "/explain";
 
@@ -34,7 +37,7 @@ export default function Layout() {
               to="/"
               className="text-2xl md:text-3xl font-bold text-violet-600 tracking-tight hover:text-violet-700 transition-colors"
             >
-              Dstic
+              Agentic Medical Analyser
             </Link>
             <nav className="hidden md:flex items-center gap-2 text-slate-700 text-sm font-medium">
               <Link
@@ -45,17 +48,38 @@ export default function Layout() {
               </Link>
               <span className="text-slate-400">/</span>
               <Link
-                to="/diagnosis"
-                className={isDiagnosis ? "text-violet-600 font-semibold" : "hover:text-violet-600 transition-colors"}
+                to="/dashboard"
+                className={isDashboard ? "text-violet-600 font-semibold" : "hover:text-violet-600 transition-colors"}
               >
-                Diagnosis
+                Dashboard
+              </Link>
+              <span className="text-slate-400">/</span>
+              <Link
+                to="/intake"
+                className={isIntake ? "text-violet-600 font-semibold" : "hover:text-violet-600 transition-colors"}
+              >
+                Triage
+              </Link>
+              <span className="text-slate-400">/</span>
+              <Link
+                to="/results"
+                className={isResults ? "text-violet-600 font-semibold" : "hover:text-violet-600 transition-colors"}
+              >
+                Results
+              </Link>
+              <span className="text-slate-400">/</span>
+              <Link
+                to="/hospitals"
+                className={isHospitals ? "text-violet-600 font-semibold" : "hover:text-violet-600 transition-colors"}
+              >
+                Hospitals
               </Link>
               <span className="text-slate-400">/</span>
               <Link
                 to="/chat"
                 className={isChat ? "text-violet-600 font-semibold" : "hover:text-violet-600 transition-colors"}
               >
-                Chat
+                AI Assistant
               </Link>
               <span className="text-slate-400">/</span>
               <Link
@@ -71,7 +95,13 @@ export default function Layout() {
           </header>
 
           <main className="flex-1 relative min-h-0 overflow-auto">
-            <Outlet />
+            {location.pathname === "/" ? (
+              <Outlet />
+            ) : (
+              <div className="px-6 md:px-10 pt-8 md:pt-10 pb-8 md:pb-12">
+                <Outlet />
+              </div>
+            )}
           </main>
         </div>
       </div>

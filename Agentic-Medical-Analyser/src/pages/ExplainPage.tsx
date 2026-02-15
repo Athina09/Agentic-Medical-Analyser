@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
-const EXPLAIN_API = "http://127.0.0.1:9000/explain";
+import { explain as apiExplain } from "@/lib/api";
 
 export default function ExplainPage() {
   const [loading, setLoading] = useState(false);
@@ -12,25 +11,13 @@ export default function ExplainPage() {
     setExplanation("");
     setError("");
     setLoading(true);
-    const payload = {
-      age: 40,
-      gender: "Male",
-      symptoms: ["Chest pain", "Shortness of breath"],
-      vitals: { heart_rate: 115, temperature: 38.2 },
-      pre_existing_conditions: ["Hypertension"],
-      predicted_risk: "High",
-      recommended_department: "Cardiology",
-    };
+    const symptoms = "Chest pain, Shortness of breath";
+    const predictedDepartment = "Cardiology";
     try {
-      const res = await fetch(EXPLAIN_API, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const data = await res.json();
+      const data = await apiExplain(symptoms, predictedDepartment);
       setExplanation(data.explanation ?? "");
     } catch {
-      setError("Failed to generate explanation. Check backend.");
+      setError("Failed to generate explanation. Is the backend running? (npm run dev in Pragyan folder)");
     } finally {
       setLoading(false);
     }
