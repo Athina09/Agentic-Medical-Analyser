@@ -1,73 +1,150 @@
-# Welcome to your Lovable project
+# Agentic Medical Analyser
 
-## Project info
+Agentic Medical Analyser is an AI-powered medical triage and diagnostic assistant designed to simulate intelligent patient intake, risk assessment, department routing, and explainable predictions.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+The system combines rule-based logic, optional machine learning models, and LLM-powered assistance to provide fast preliminary medical guidance.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## Live Demo
 
-**Use Lovable**
+**[https://agentic-medical-analyser.vercel.app](https://agentic-medical-analyser.vercel.app)**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## Features
 
-**Use your preferred IDE**
+### Patient Intake
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Interactive multi-step form for capturing symptoms and patient details.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Calls **/triage** for risk assessment
+- Calls **/predict** for department routing
 
-Follow these steps:
+### Triage Results
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- Risk level classification
+- Suggested medical department
+- Confidence score
+- Actionable recommendations
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### AI Assistant
 
-# Step 3: Install the necessary dependencies.
-npm i
+- LLM-powered chat via **/chat** (Groq API)
+- Graceful fallback to local responses if unavailable
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### AI Explainability
+
+- **/explain** endpoint provides prediction rationale
+- Helps users understand system decisions
+
+### Nearby Hospitals
+
+- Location-aware hospital lookup
+- Uses **/nearest-hospital** (Overpass API)
+
+---
+
+## Running the Application
+
+The project consists of two components:
+
+- **Backend** (FastAPI)
+- **Frontend** (Vite / npm)
+
+---
+
+### Backend Setup
+
+Run from the Pragyan project root:
+
+```bash
+cd /Users/apple/Pragyan
+python main_combined.py
+```
+
+**Default Backend URL:** `http://localhost:8010`
+
+If port 8010 is occupied, the server may automatically use ports **8011–8015**.
+
+#### Backend Requirements
+
+- Python 3.x
+- FastAPI
+- Uvicorn
+
+Install dependencies if needed:
+
+```bash
+pip install fastapi uvicorn python-dotenv
+```
+
+#### Environment Variables
+
+Create a **.env** file:
+
+```
+GROQ_API_KEY=your_api_key_here
+```
+
+Required for:
+
+- **/chat**
+- **/explain**
+
+#### Optional Machine Learning Models
+
+If present, ML-based triage logic will be used:
+
+- `models/triage_model.pkl`
+- `models/encoders.pkl`
+
+If missing, the system falls back to **rule-based logic**.
+
+---
+
+### Frontend Setup
+
+```bash
+cd Agentic-Medical-Analyser
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+**Default Frontend URL:** `http://localhost:5173`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+#### API Configuration
 
-**Use GitHub Codespaces**
+The frontend defaults to **http://localhost:8010**.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+To override:
 
-## What technologies are used for this project?
+```bash
+cp .env.example .env
+```
 
-This project is built with:
+Edit **.env**:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```
+VITE_API_URL=http://localhost:8010
+```
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## Conceptual Architecture
 
-## Can I connect a custom domain to my Lovable project?
+**User Input** → **Backend Intelligence Layer** →
 
-Yes, you can!
+| Component | Endpoint |
+|-----------|----------|
+| **Risk Engine** | /triage |
+| **Prediction Engine** | /predict |
+| **Explainability Engine** | /explain |
+| **AI Assistant** | /chat |
+| **Location Services** | /nearest-hospital |
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Disclaimer
+
+This project is a research and educational prototype. It is **not** a replacement for professional medical advice and is **not** approved for clinical use. Always consult qualified medical professionals for real health concerns.
