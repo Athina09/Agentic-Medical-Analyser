@@ -1,73 +1,45 @@
-# Welcome to your Lovable project
+# Agentic Medical Analyser
 
-## Project info
+AI-powered medical triage and diagnostic system with patient intake, risk assessment, department routing, and explainability.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Running the App
 
-## How can I edit this code?
+### 1. Backend (from Pragyan root)
 
-There are several ways of editing your application.
+```bash
+cd /Users/apple/Pragyan
+python main_combined.py
+```
 
-**Use Lovable**
+Backend runs on **http://localhost:8010** (or 8011–8015 if 8010 is busy). Requires:
+- Python 3.x, FastAPI, uvicorn
+- GROQ_API_KEY in `.env` for chat/explain features
+- Optional: `models/triage_model.pkl` and `models/encoders.pkl` for ML triage
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+### 2. Frontend
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+cd Agentic-Medical-Analyser
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Frontend runs at **http://localhost:5173** (or 8080+).
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 3. API URL
 
-**Use GitHub Codespaces**
+By default the frontend uses `http://localhost:8010`. Override with:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```bash
+cp .env.example .env
+# Edit .env: VITE_API_URL=http://localhost:8010
+```
 
-## What technologies are used for this project?
+## Features
 
-This project is built with:
+- **Patient Intake** – Multi-step form; calls `/triage` and `/predict` for risk + department
+- **Triage Results** – Risk level, department, confidence, recommendations
+- **AI Assistant** – Chat uses backend `/chat` (Groq); falls back to local responses if offline
+- **AI Explainability** – Calls `/explain` for prediction rationale
+- **Nearby Hospitals** – “Use my location” calls `/nearest-hospital` (Overpass API)
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
