@@ -6,6 +6,12 @@ The system combines rule-based logic, optional machine learning models, and LLM-
 
 ---
 
+## Live Demo
+
+**[https://agentic-medical-analyser.vercel.app](https://agentic-medical-analyser.vercel.app)**
+
+---
+
 ## Features
 
 ### Patient Intake
